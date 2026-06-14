@@ -5,18 +5,23 @@
 
 class Wizard;
 
-class Spell
-{
-    public:
-        Spell(int type);
-        virtual ~Spell();
-        int getType();
+class Spell {
+public:
+    //Constructor and Deconstructor
+    Spell(int type);
+    virtual ~Spell();
 
-    protected:
-        int type; 	//Instants are either damaging or healing
-					//Sorceries are either debuffing or buffing
+    //Functions
+    virtual void cast(Wizard *target) = 0;
 
-    private:
+    //Getters
+    int getType();
+
+protected:
+    int type; //Instants are either damaging or healing
+    //Sorceries are either debuffing or buffing
+
+private:
 };
 
 #endif // SPELL_H

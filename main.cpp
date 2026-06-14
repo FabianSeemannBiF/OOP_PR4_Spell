@@ -1,14 +1,10 @@
 #include <iostream>
-#include <stdlib.h>
 #include <time.h>
 #include "Wizard.h"
-#include "Spell.h"
-#include "Instant.h"
-#include "Sorcery.h"
 
 int main()
 {
-    srand (time(NULL)); //Initializing random seed
+    srand (time(nullptr)); //Initializing random seed
 
     Wizard wizOne = Wizard("Xardas"); //Creating the wizards
     Wizard wizTwo = Wizard("Pyrokar");
@@ -16,9 +12,21 @@ int main()
     while(wizOne.spellsLeft() || wizTwo.spellsLeft())
     {//Casting spells until no spells are left
         if(wizOne.spellsLeft())
-            wizOne.castSpell(&wizTwo);
+            try {
+                wizOne.castSpell(&wizTwo);
+            } catch (std::invalid_argument &e) {
+                std::cerr << e.what() << std::endl;
+            } catch (...) {
+                std::cerr << "Unknown error" << std::endl;
+            }
         if(wizTwo.spellsLeft())
-            wizTwo.castSpell(&wizOne);
+            try {
+                wizTwo.castSpell(&wizOne);
+            } catch (std::invalid_argument &e) {
+                std::cerr << e.what() << std::endl;
+            } catch (...) {
+                std::cerr << "Unknown error" << std::endl;
+            }
     }
 
     wizOne.print(); //Print final state

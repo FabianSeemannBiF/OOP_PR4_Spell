@@ -1,4 +1,4 @@
-#include "Spell.h"
+#include "../includes/Spell.h"
 
 Spell::Spell(int type)
 {
